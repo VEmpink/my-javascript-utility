@@ -38,3 +38,28 @@ function getAccessableObjectProperty(dataObject, prefix = '') {
     return [...result, prefix + objProp];
   }, []);
 }
+
+/**
+ * Cek keaslian Image Base64
+ */
+function isValidImageBase64(base64) {
+  const pattern = new RegExp(/^data:image\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;base64,(?:[A-Za-z0-9]|[+/])+={0,2}/);
+  return pattern.test(base64);
+}
+
+/**
+ * Konversi angka besar menjadi angka singkatan seperti rb, jt, m, t
+ * @param {number} number
+ */
+function toAbbreviateNumber(number) {
+  switch (true) {
+    case number > 1e3:
+      return `Rp ${number / 1e3}rb`;
+    case number > 1e6:
+      return `Rp ${number / 1e6}jt`;
+    case number > 1e9:
+      return `Rp ${number / 1e9}m`;
+    case number > 1e12:
+      return `Rp ${number / 1e12}t`;
+  }
+}
